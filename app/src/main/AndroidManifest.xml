@@ -16,6 +16,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".Editar"
+            android:theme="@style/AppTheme.CustomTheme">
+
+        </activity>
+        <activity android:name=".Confirmar"
+            android:theme="@style/AppTheme.CustomTheme">
+
+        </activity>
     </application>
 
 

@@ -506,9 +506,16 @@ android:layout_alignParentBottom="true">
 
 
 
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginRight="70dp"
+        android:src="@drawable/mennu1"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/editar"
         android:text="EDITAR PEDIDO"
         android:background="@android:color/transparent"
 android:layout_marginRight="70dp"
@@ -524,6 +531,16 @@ android:layout_marginRight="70dp"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         android:textSize="30sp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listo"
+        android:text="LISTO"
+        android:background="@android:color/transparent"
+        android:layout_marginLeft="70dp"
+        android:textSize="30sp"
+        />
 
 </LinearLayout>
 </RelativeLayout>

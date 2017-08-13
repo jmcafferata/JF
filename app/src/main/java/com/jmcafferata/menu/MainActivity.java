@@ -1,8 +1,11 @@
 package com.jmcafferata.menu;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +38,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Button editar = (Button) findViewById(R.id.editar);
+        Button listo = (Button) findViewById(R.id.listo);
+
+
+        editar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, Editar.class));
+            }
+        });
+
+        listo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, Confirmar.class));
+            }
+        });
 
         cinzel_bold = Typeface.createFromAsset(getAssets(), "fonts/Cinzel-Bold.otf");
         cinzel_regular = Typeface.createFromAsset(getAssets(), "fonts/Cinzel-Regular.otf");
