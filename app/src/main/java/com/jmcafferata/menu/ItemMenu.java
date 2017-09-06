@@ -1,14 +1,28 @@
 package com.jmcafferata.menu;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * Created by Franco on 13/08/2017.
+ * Created by JM on 31/08/2017.
  */
 
-class Item {
+public class ItemMenu extends Menu{
+
     public String nombre;
     public int precio;
     public String comentario;
     public boolean estaListo;
+    public int cantidad;
+    public String descripcion;
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
     public String getNombre() {
         return nombre;
@@ -40,5 +54,13 @@ class Item {
 
     public void setEstaListo(boolean estaListo) {
         this.estaListo = estaListo;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 }

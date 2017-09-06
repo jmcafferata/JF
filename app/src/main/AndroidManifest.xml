@@ -20,6 +20,10 @@
         <activity android:name=".Editar"
             android:theme="@style/AppTheme.CustomTheme">
 
+            </activity>
+        <activity android:name=".Agregar"
+            android:theme="@style/AppTheme.CustomTheme">
+
         </activity>
         <activity android:name=".Confirmar"
             android:theme="@style/AppTheme.CustomTheme">

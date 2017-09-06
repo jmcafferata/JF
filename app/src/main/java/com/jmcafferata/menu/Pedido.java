@@ -7,27 +7,37 @@ import java.util.List;
  * Created by Franco on 13/08/2017.
  */
 
-public class Pedido {
-    public int total;
+public class Pedido { public int total;
     public int mesa;
-    public List<Item> items = new ArrayList<>();
+    public List<ItemMenu> items = new ArrayList<>();
     public String horaLlegada;
     public String horaPedido;
     public String horaPartida;
 
-    public void agregar(Item item){
-    items.add(item);
+
+    public void agregar(ItemMenu item){
+        item.setCantidad(item.getCantidad()+1);
         actualizarPrecio();
     }
-    
-    public void remover(Item item){
+
+    public void restar(ItemMenu item){
+        if(item.getCantidad()>1){
+            item.setCantidad(item.getCantidad()-1);} else {
+            item.setCantidad(1);
+        }
+        actualizarPrecio();
+    }
+
+    public void remover(ItemMenu item){
         items.remove(item);
         actualizarPrecio();
     }
-    
+
     public void actualizarPrecio(){
-        for (Item i:items) {
-            setTotal(getTotal() + i.getPrecio());
+        setTotal(0);
+        for (ItemMenu i:items) {
+
+            setTotal(getTotal()+(i.getPrecio()*i.getCantidad()));
         }
     }
 

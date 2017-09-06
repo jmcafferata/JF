@@ -1,3 +1,35 @@
 <resources>
     <string name="app_name">Menu</string>
+
+    <string name="Categoria1">CARNES Y CERDOS</string>
+    <string name="_1Nombre">HOUSTON\'S BARBECUE RIBS</string>
+    <string name="_1Descripcion">Costillar de cerdo asado a fuego lento, aderezado con salsa barbacoa, acompañado de papas fritas y cole slaw o papa rellena.</string>
+    <integer name="_1Precio">360</integer>
+
+    <string name="_2Nombre">FILET MIGNON</string>
+    <string name="_2Descripcion">Bife de lomo condimentado a la leña, acompañado con papa rellena.</string>
+    <integer name="_2Precio">330</integer>
+
+    <string name="Categoria2">PASTAS Y PLATOS VEGETARIANOS</string>
+    <string name="_3Nombre">ARIZONA PASTA</string>
+    <string name="_3Descripcion">Pasta Penne Rigatti al dente, importada de Italia, servida con Salsa Alfredo, pollo, tomates cherry y especias de Arizona.</string>
+    <integer name="_3Precio">220</integer>
+
+    <string name="Categoria3">HAMBUERGUESAS Y SANDWICHES</string>
+    <string name="_4Nombre">CLUB SANDWICH</string>
+    <string name="_4Descripcion">Sandwich de Jamón, queso y pollo, fileteado con panceta, tomate y lechuga, servido en pan de trigo acompañado con papas fritas.</string>
+    <integer name="_4Precio">200</integer>
+
+    <string name="Categoria4">AVES Y PESCADOS</string>
+    <string name="_5Nombre">SMOKED SALMON WITH HOMEMADE DRESSING</string>
+    <string name="_5Descripcion">Salmón ahumado, acompañado con tostaditas.</string>
+    <integer name="_5Precio">300</integer>
+
+    <string name="Categoria5">POSTRES</string>
+    <string name="_6Nombre">BROWNIE KANSAS</string>
+    <string name="_6Descripcion">Brownie estilo Nueva York con chispas de chocolate negro, nueces, almendras y helado, bañado en salsa de chocolate.</string>
+    <integer name="_6Precio">160</integer>
+
+
+
 </resources>
