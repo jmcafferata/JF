@@ -34,6 +34,7 @@ public class Agregar extends Activity{
         final Button more = (Button)findViewById(R.id.more);
         final TextView quant = (TextView) findViewById(R.id.quant);
         final TextView aclaraciones = (TextView) findViewById(R.id.aclaraciones);
+        final TextView cancelar = (TextView) findViewById(R.id.cancelar);
 
         // Toma nombre, cantidad y precio del producto
 
@@ -66,6 +67,13 @@ public class Agregar extends Activity{
                     quant.setText(Integer.toString(item.getCantidad()));
                     totalNum.setText(String.valueOf(item.getCantidad()*item.getPrecio()));
                 }
+            }
+        });
+
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
