@@ -1,5 +1,8 @@
 package com.jmcafferata.menu;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,13 +10,32 @@ import java.util.List;
  * Created by Franco on 13/08/2017.
  */
 
-public class Pedido { public int total;
+public class Pedido implements Parcelable{
+    public int total;
     public int mesa;
-    public List<ItemMenu> items = new ArrayList<>();
+    public ArrayList<ItemMenu> items = new ArrayList<>();
     public String horaLlegada;
     public String horaPedido;
     public String horaPartida;
 
+    public Pedido(Parcel parcel){
+        this.total = parcel.readInt();
+        this.mesa = parcel.readInt();
+        this.items = parcel.readArrayList(null);
+    }
+
+
+    public static final Creator<Pedido> CREATOR = new Creator<Pedido>() {
+        @Override
+        public Pedido createFromParcel(Parcel in) {
+            return new Pedido(in);
+        }
+
+        @Override
+        public Pedido[] newArray(int size) {
+            return new Pedido[size];
+        }
+    };
 
     public void agregar(ItemMenu item){
         item.setCantidad(item.getCantidad()+1);
@@ -79,5 +101,20 @@ public class Pedido { public int total;
 
     public void setHoraPartida(String horaPartida) {
         this.horaPartida = horaPartida;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(total);
+        dest.writeInt(mesa);
+        dest.writeTypedList(items);
+        dest.writeString(horaLlegada);
+        dest.writeString(horaPedido);
+        dest.writeString(horaPartida);
     }
 }

@@ -1,5 +1,9 @@
 package com.jmcafferata.menu;
 
+import android.content.ClipData;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +11,7 @@ import java.util.List;
  * Created by JM on 31/08/2017.
  */
 
-public class ItemMenu extends Menu{
+public class ItemMenu extends Menu implements Parcelable{
 
     public String nombre;
     public int precio;
@@ -15,6 +19,45 @@ public class ItemMenu extends Menu{
     public boolean estaListo;
     public int cantidad;
     public String descripcion;
+
+    public ItemMenu (Parcel parcel){
+        this.nombre = parcel.readString();
+        this.precio = parcel.readInt();
+        this.comentario = parcel.readString();
+        this.cantidad = parcel.readInt();
+        this.descripcion = parcel.readString();
+    }
+
+    public ItemMenu(){
+        super();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(nombre);
+        dest.writeInt(precio);
+        dest.writeString(comentario);
+        dest.writeByte((byte) (estaListo ? 1 : 0));
+        dest.writeInt(cantidad);
+        dest.writeString(descripcion);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<ItemMenu> CREATOR = new Creator<ItemMenu>() {
+        @Override
+        public ItemMenu createFromParcel(Parcel in) {
+            return new ItemMenu(in);
+        }
+
+        @Override
+        public ItemMenu[] newArray(int size) {
+            return new ItemMenu[size];
+        }
+    };
 
     public String getDescripcion() {
         return descripcion;
