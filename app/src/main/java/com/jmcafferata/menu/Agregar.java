@@ -1,6 +1,7 @@
 package com.jmcafferata.menu;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -35,12 +36,22 @@ public class Agregar extends Activity{
         final TextView quant = (TextView) findViewById(R.id.quant);
         final TextView aclaraciones = (TextView) findViewById(R.id.aclaraciones);
         final TextView cancelar = (TextView) findViewById(R.id.cancelar);
+        final TextView confirmar = (TextView) findViewById(R.id.confirmar);
+
+        // Importar el pedido
+
+        final Pedido pedido = getIntent().getParcelableExtra("pedido");
 
         // Toma nombre, cantidad y precio del producto
 
         final int total;
         final ItemMenu item = getIntent().getParcelableExtra("item");
         nombreItem.setText(item.getNombre());
+        for(ItemMenu ip : pedido.items){
+            if(ip.getNombre().equals(item.getNombre())){
+                item.setCantidad(ip.getCantidad());
+            }
+        }
         item.setCantidad(1);
         total = item.getPrecio() * item.getCantidad();
         totalNum.setText(""+item.getPrecio());
@@ -74,6 +85,26 @@ public class Agregar extends Activity{
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        confirmar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                pedido.items.add(item);
+                System.out.println("SE HA AGREGADO UN ITEM");
+                System.out.println("Item: " + item.getNombre() + "/n Cantidad: " + item.getCantidad());
+                for (ItemMenu ip : pedido.items){
+                    System.out.println("Item del Pedido: " + ip.getNombre() + "/n Cantidad: " + ip.getCantidad());
+                }
+                Intent in = new Intent(Agregar.this, MainActivity.class);
+                in.putExtra("pedido",pedido);
+                Agregar.this.startActivity(in);
+                finish();
+
+
+
             }
         });
     }

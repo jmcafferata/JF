@@ -37,6 +37,10 @@ public class Pedido implements Parcelable{
         }
     };
 
+    public Pedido(){
+        super();
+    }
+
     public void agregar(ItemMenu item){
         item.setCantidad(item.getCantidad()+1);
         actualizarPrecio();

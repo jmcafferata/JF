@@ -107,6 +107,10 @@ public class MainActivity extends AppCompatActivity {
         menu.categorias.add(cat4);
         menu.categorias.add(cat5);
 
+        // PEDIDO
+
+        final Pedido pedido = new Pedido();
+
 
         LinearLayout parentView;
         parentView = (LinearLayout) findViewById(R.id.parentView);
@@ -146,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent myIntent = new Intent(MainActivity.this, Agregar.class);
                         myIntent.putExtra("item", i); //Optional parameters
+                        myIntent.putExtra("pedido", pedido);
                         MainActivity.this.startActivity(myIntent);
                         System.out.println("PASANDO: "+
                         i.getNombre()
