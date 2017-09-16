@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout menuItem1;
     Button editar;
     Button listo;
+
+    // RECIBIR PEDIDO DE AGREGAR
+
+    final Pedido pedido = new Pedido();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
         // PEDIDO
 
         final Pedido pedido = new Pedido();
+        pedido.items = new ArrayList<>();
+        System.out.println("ITEMS SIZE: "+pedido.items.size());
 
 
         LinearLayout parentView;
@@ -149,9 +159,15 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         Intent myIntent = new Intent(MainActivity.this, Agregar.class);
-                        myIntent.putExtra("item", i); //Optional parameters
-                        myIntent.putExtra("pedido", pedido);
-                        MainActivity.this.startActivity(myIntent);
+                        Bundle bun = new Bundle();
+                        if (pedido.items.contains(i)) {
+                            // TODO: VER ESTOOOO, pasar el item de pedido a Agregarr para que aparezca cantidad y comentario
+                        }
+                        bun.putParcelable("item", i);
+                        // bun.putParcelable("pedido", pedido);
+                        myIntent.putExtras(bun);
+                        //startActivity(myIntent);
+                        startActivityForResult(myIntent,1);
                         System.out.println("PASANDO: "+
                         i.getNombre()
                         +i.getCantidad()
@@ -165,32 +181,72 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
-        editar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, Editar.class));
-            }
-        });
-
-        listo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, Confirmar.class));
-            }
-        });
-
         // Menu
 
 
 
+    }
 
 
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                ItemMenu itemNuevo = data.getParcelableExtra("item");
+                if (pedido.items.contains(itemNuevo)) {
+                    pedido.items.remove(itemNuevo);
+                    System.out.println("REMOVED");
+
+                }
+                pedido.items.add(itemNuevo);
+                System.out.println("PEDIDO ITEMS: "+ pedido.items.size());
+                for (ItemMenu it : pedido.items) {
+                    System.out.println("NOMBRE"+it.nombre);
+                    System.out.println("CANTIDAD " + it.cantidad);
+                }
+                TextView total = (TextView) findViewById(R.id.total);
+                pedido.total = 0;
+                for (ItemMenu im : pedido.items) {
+                    pedido.total = pedido.total + (im.precio * im.cantidad);
+                }
+                total.setText(""+pedido.getTotal());
+                editar.setTextColor(getResources().getColor(R.color.white));
+                editar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent myIntent = new Intent(MainActivity.this, Editar.class);
+                        Bundle bun = new Bundle();
+                        bun.putParcelable("pedido", pedido);
+                        System.out.println("ESTOY EN MAINACT, y pedido tiene" + pedido.items.size() + "items");
+                        myIntent.putExtras(bun);
+                        startActivityForResult(myIntent,2);
+                    }
+                });
+
+                listo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(MainActivity.this, Confirmar.class));
+                    }
+                });
+            }
+        } else if (requestCode == 2) {
+            if(resultCode == RESULT_OK) {
+                Pedido pedidoTraido = data.getParcelableExtra("pedido");
+                pedido.items = pedidoTraido.items;
+                pedido.total = 0;
+                for (ItemMenu im : pedido.items) {
+                    pedido.total = pedido.total + (im.precio * im.cantidad);
+                }
+                TextView total = (TextView) findViewById(R.id.total);
+                total.setText("" + pedido.getTotal());
+                if (pedido.total == 0) {
+                    editar.setTextColor(getResources().getColor(R.color.textGray));
+                    editar.setClickable(false);
+                }
+            }
+        }
     }
 
 

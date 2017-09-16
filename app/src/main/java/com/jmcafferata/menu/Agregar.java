@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 /**
  * Created by francodarget on 8/13/17.
  */
@@ -35,27 +37,28 @@ public class Agregar extends Activity{
         final Button more = (Button)findViewById(R.id.more);
         final TextView quant = (TextView) findViewById(R.id.quant);
         final TextView aclaraciones = (TextView) findViewById(R.id.aclaraciones);
+        aclaraciones.setTextColor(getResources().getColor(R.color.textGray));
         final TextView cancelar = (TextView) findViewById(R.id.cancelar);
         final TextView confirmar = (TextView) findViewById(R.id.confirmar);
 
         // Importar el pedido
 
-        final Pedido pedido = getIntent().getParcelableExtra("pedido");
+        Bundle bun = getIntent().getExtras();
 
-        // Toma nombre, cantidad y precio del producto
+        // Toma nombre, aclaraciones, cantidad y precio del producto
 
         final int total;
-        final ItemMenu item = getIntent().getParcelableExtra("item");
+        final ItemMenu item = bun.getParcelable("item");
         nombreItem.setText(item.getNombre());
-        for(ItemMenu ip : pedido.items){
-            if(ip.getNombre().equals(item.getNombre())){
-                item.setCantidad(ip.getCantidad());
-            }
+        if (item.getCantidad()==0){
+            item.setCantidad(1);
         }
-        item.setCantidad(1);
-        total = item.getPrecio() * item.getCantidad();
-        totalNum.setText(""+item.getPrecio());
         quant.setText(Integer.toString(item.getCantidad()));
+        totalNum.setText(""+item.getPrecio());
+        if (item.getComentario() != null) {
+            aclaraciones.setText(item.getComentario());
+            aclaraciones.setTextColor(getResources().getColor(R.color.textGray));
+        }
 
         // Botones de cantidad
 
@@ -92,16 +95,12 @@ public class Agregar extends Activity{
             @Override
             public void onClick(View v) {
 
-                pedido.items.add(item);
-                System.out.println("SE HA AGREGADO UN ITEM");
-                System.out.println("Item: " + item.getNombre() + "/n Cantidad: " + item.getCantidad());
-                for (ItemMenu ip : pedido.items){
-                    System.out.println("Item del Pedido: " + ip.getNombre() + "/n Cantidad: " + ip.getCantidad());
-                }
-                Intent in = new Intent(Agregar.this, MainActivity.class);
-                in.putExtra("pedido",pedido);
-                Agregar.this.startActivity(in);
+                Intent resultIntent = new Intent();
+                item.setComentario(aclaraciones.getText().toString());
+                resultIntent.putExtra("item", item);
+                setResult(RESULT_OK, resultIntent);
                 finish();
+
 
 
 

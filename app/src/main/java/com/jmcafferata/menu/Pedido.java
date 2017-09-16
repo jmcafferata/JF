@@ -1,5 +1,6 @@
 package com.jmcafferata.menu;
 
+import android.content.ClipData;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -13,15 +14,17 @@ import java.util.List;
 public class Pedido implements Parcelable{
     public int total;
     public int mesa;
-    public ArrayList<ItemMenu> items = new ArrayList<>();
+    public ArrayList<ItemMenu> items;
     public String horaLlegada;
     public String horaPedido;
     public String horaPartida;
 
     public Pedido(Parcel parcel){
+
         this.total = parcel.readInt();
         this.mesa = parcel.readInt();
-        this.items = parcel.readArrayList(null);
+        items = new ArrayList<>();
+        parcel.readTypedList(items, ItemMenu.CREATOR);
     }
 
 
@@ -39,6 +42,7 @@ public class Pedido implements Parcelable{
 
     public Pedido(){
         super();
+        items = new ArrayList<>();
     }
 
     public void agregar(ItemMenu item){

@@ -20,10 +20,13 @@ public class ItemMenu extends Menu implements Parcelable{
     public int cantidad;
     public String descripcion;
 
+
+
     public ItemMenu (Parcel parcel){
         this.nombre = parcel.readString();
         this.precio = parcel.readInt();
         this.comentario = parcel.readString();
+        this.estaListo = parcel.readByte() !=0;
         this.cantidad = parcel.readInt();
         this.descripcion = parcel.readString();
     }
@@ -105,5 +108,21 @@ public class ItemMenu extends Menu implements Parcelable{
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ItemMenu itemMenu = (ItemMenu) o;
+
+        return nombre != null ? nombre.equals(itemMenu.nombre) : itemMenu.nombre == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return nombre != null ? nombre.hashCode() : 0;
     }
 }
