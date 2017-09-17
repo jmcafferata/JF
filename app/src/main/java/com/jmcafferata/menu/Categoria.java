@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Categoria {
     public String nombre;
-    public ArrayList<ItemMenu> items = new ArrayList<>();
+    public ArrayList<Articulo> items = new ArrayList<>();
 
 
 
@@ -21,11 +21,11 @@ public class Categoria {
         this.nombre = nombre;
     }
 
-    public List<ItemMenu> getItems() {
+    public List<Articulo> getItems() {
         return items;
     }
 
-    public void setItems(ArrayList<ItemMenu> items) {
+    public void setItems(ArrayList<Articulo> items) {
         this.items = items;
     }
 }

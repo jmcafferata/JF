@@ -1,11 +1,9 @@
 package com.jmcafferata.menu;
 
-import android.content.ClipData;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Franco on 13/08/2017.
@@ -14,7 +12,7 @@ import java.util.List;
 public class Pedido implements Parcelable{
     public int total;
     public int mesa;
-    public ArrayList<ItemMenu> items;
+    public ArrayList<Articulo> items;
     public String horaLlegada;
     public String horaPedido;
     public String horaPartida;
@@ -24,7 +22,7 @@ public class Pedido implements Parcelable{
         this.total = parcel.readInt();
         this.mesa = parcel.readInt();
         items = new ArrayList<>();
-        parcel.readTypedList(items, ItemMenu.CREATOR);
+        parcel.readTypedList(items, Articulo.CREATOR);
     }
 
 
@@ -45,12 +43,12 @@ public class Pedido implements Parcelable{
         items = new ArrayList<>();
     }
 
-    public void agregar(ItemMenu item){
+    public void agregar(Articulo item){
         item.setCantidad(item.getCantidad()+1);
         actualizarPrecio();
     }
 
-    public void restar(ItemMenu item){
+    public void restar(Articulo item){
         if(item.getCantidad()>1){
             item.setCantidad(item.getCantidad()-1);} else {
             item.setCantidad(1);
@@ -58,14 +56,14 @@ public class Pedido implements Parcelable{
         actualizarPrecio();
     }
 
-    public void remover(ItemMenu item){
+    public void remover(Articulo item){
         items.remove(item);
         actualizarPrecio();
     }
 
     public void actualizarPrecio(){
         setTotal(0);
-        for (ItemMenu i:items) {
+        for (Articulo i:items) {
 
             setTotal(getTotal()+(i.getPrecio()*i.getCantidad()));
         }
@@ -124,5 +122,19 @@ public class Pedido implements Parcelable{
         dest.writeString(horaLlegada);
         dest.writeString(horaPedido);
         dest.writeString(horaPartida);
+    }
+
+    @Override
+    public String toString() {
+        String itemsString = "";
+        for (Articulo item : items) {
+            itemsString = itemsString + item.toString() + "\n";
+        }
+        return "********Pedido: ********\n" +
+                "Total: " + total +
+                "\nMesa: " + mesa +
+                "\n Items:\n" + itemsString +
+                "Hora del pedido: " + horaPedido;
+
     }
 }

@@ -1,17 +1,13 @@
 package com.jmcafferata.menu;
 
-import android.content.ClipData;
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by JM on 31/08/2017.
  */
 
-public class ItemMenu extends Menu implements Parcelable{
+public class Articulo extends Menu implements Parcelable{
 
     public String nombre;
     public int precio;
@@ -22,7 +18,7 @@ public class ItemMenu extends Menu implements Parcelable{
 
 
 
-    public ItemMenu (Parcel parcel){
+    public Articulo(Parcel parcel){
         this.nombre = parcel.readString();
         this.precio = parcel.readInt();
         this.comentario = parcel.readString();
@@ -31,7 +27,7 @@ public class ItemMenu extends Menu implements Parcelable{
         this.descripcion = parcel.readString();
     }
 
-    public ItemMenu(){
+    public Articulo(){
         super();
     }
 
@@ -50,15 +46,15 @@ public class ItemMenu extends Menu implements Parcelable{
         return 0;
     }
 
-    public static final Creator<ItemMenu> CREATOR = new Creator<ItemMenu>() {
+    public static final Creator<Articulo> CREATOR = new Creator<Articulo>() {
         @Override
-        public ItemMenu createFromParcel(Parcel in) {
-            return new ItemMenu(in);
+        public Articulo createFromParcel(Parcel in) {
+            return new Articulo(in);
         }
 
         @Override
-        public ItemMenu[] newArray(int size) {
-            return new ItemMenu[size];
+        public Articulo[] newArray(int size) {
+            return new Articulo[size];
         }
     };
 
@@ -115,14 +111,22 @@ public class ItemMenu extends Menu implements Parcelable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ItemMenu itemMenu = (ItemMenu) o;
+        Articulo articulo = (Articulo) o;
 
-        return nombre != null ? nombre.equals(itemMenu.nombre) : itemMenu.nombre == null;
+        return nombre != null ? nombre.equals(articulo.nombre) : articulo.nombre == null;
 
     }
 
     @Override
     public int hashCode() {
         return nombre != null ? nombre.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return  "Artículo: " + nombre +
+                "\nPrecio: " + precio +
+                "\nComentario: " + comentario +
+                "\nCantidad: " + cantidad;
     }
 }
