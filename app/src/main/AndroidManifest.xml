@@ -31,7 +31,10 @@
             android:theme="@style/AppTheme.CustomTheme" />
         <activity android:name=".Listo" />
         <activity android:name=".Mesa" />
-        <activity android:name=".Ver"></activity>
+        <activity android:name=".Ver"
+            android:theme="@style/AppTheme.CustomTheme"/>
+        <activity android:name=".Mozo"
+            android:theme="@style/AppTheme.CustomTheme"/>
     </application>
 
 </manifest>

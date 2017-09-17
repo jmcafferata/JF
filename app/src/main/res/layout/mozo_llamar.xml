@@ -6,24 +6,19 @@
     android:background="@color/background1"
     android:orientation="vertical">
 
-<ScrollView
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    android:layout_marginBottom="100dp">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/parentView">
-
-    </LinearLayout>
-</ScrollView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:textColor="@color/textGray"
+            android:text="¿Desea llamar a un mozo?"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,7 +26,6 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="30dp"
-
         android:orientation="horizontal">
 
 
@@ -41,16 +35,10 @@
             android:textStyle="bold"
             android:layout_height="wrap_content"
             android:textSize="30sp"
+            android:id="@+id/cancelar"
             android:textColor="@color/textGray"
-            android:text="TOTAL: $"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textColor="@color/textGray"
-            android:id="@+id/total"
-            android:textStyle="bold"
-            android:text="0"/>
+            android:text="CANCELAR"/>
+
 
         <TextView
             android:layout_width="wrap_content"

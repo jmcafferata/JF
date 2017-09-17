@@ -14,11 +14,11 @@
             android:layout_height="wrap_content"
             android:text="¡Tu pedido fue enviado!"
             android:textAlignment="center"
-            android:textSize="60dp"/>
+            android:textSize="40dp"/>
         <ImageView
             android:layout_width="300dp"
             android:layout_marginTop="60dp"
-            android:layout_height="400dp"
+            android:layout_height="300dp"
             android:id="@+id/ticket"
             android:src="@drawable/pedido"/>
         <TextView
@@ -27,7 +27,7 @@
             android:textAlignment="center"
             android:layout_marginTop="60dp"
             android:text="En un rato lo tendrás en la mesa...."
-            android:textSize="50dp"/>
+            android:textSize="30dp"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -47,6 +47,7 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:id="@+id/mozo"
         android:layout_marginTop="60dp"
         android:src="@drawable/mozo"/>
 

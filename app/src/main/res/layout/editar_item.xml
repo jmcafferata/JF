@@ -104,6 +104,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_marginLeft="50dp"
+            android:maxLines="2"
             android:hint="Añadir aclaraciones..."
             android:textSize="30dp"
             android:id="@+id/aclaraciones"

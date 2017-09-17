@@ -73,6 +73,7 @@
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:id="@+id/mozo"
             android:layout_marginRight="70dp"
             android:src="@drawable/mozo" />
 

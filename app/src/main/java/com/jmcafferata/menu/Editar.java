@@ -34,7 +34,7 @@ public class Editar extends Activity{
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        getWindow().setLayout((int)(width*.9),(int)(height*.7)); // Este es el tamaño de la ventana
+        getWindow().setLayout((int)(width*.9),(int)(height*.6)); // Este es el tamaño de la ventana
 
         // UI Total, Cancelar, Aceptar
         final TextView total = (TextView) findViewById(R.id.total);

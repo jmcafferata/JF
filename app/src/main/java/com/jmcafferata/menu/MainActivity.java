@@ -1,17 +1,24 @@
 package com.jmcafferata.menu;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,7 +49,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Remove title bar
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        //Remove notification bar
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_main);
+
+
 
 
 
@@ -57,11 +73,46 @@ public class MainActivity extends AppCompatActivity {
         editar = (Button) findViewById(R.id.editar);
         listo = (Button) findViewById(R.id.listo);
         totalText = (TextView) findViewById(R.id.totalText);
+        ImageView mozo = (ImageView) findViewById(R.id.mozo);
+
+        mozo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(new ContextThemeWrapper(MainActivity.this, R.style.mozoDialog));
+                builder1.setMessage("¿Desea llamar al mozo?");
+                builder1.setCancelable(true);
+                builder1.setIcon(R.drawable.mozo);
+                builder1.setTitle("Confirmar");
+                builder1.setPositiveButton(
+                        "ACEPTAR",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // TODO: LLAMAR MOZO
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "CANCELAR",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+                TextView tv = (TextView)alert11.getWindow().findViewById(android.R.id.message);
+                tv.setTextSize(30);
+            }
+        });
+
+        // Para inflar después
+        LinearLayout parentView;
+        parentView = (LinearLayout) findViewById(R.id.parentView);
 
         // MENU
 
         // ITEMS
-
         Articulo item1 = new Articulo();
         item1.setNombre(getString(R.string._1Nombre));
         item1.setDescripcion(getString(R.string._1Descripcion));
@@ -89,7 +140,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         // CATEGORIAS
-
         Categoria cat1 = new Categoria();
         cat1.setNombre(getString(R.string.Categoria1));
         cat1.items.add(item1);
@@ -115,18 +165,14 @@ public class MainActivity extends AppCompatActivity {
         menu.categorias.add(cat5);
 
         // PEDIDO
-
         final Pedido pedido = new Pedido();
         pedido.items = new ArrayList<>();
-
-
-        LinearLayout parentView;
-        parentView = (LinearLayout) findViewById(R.id.parentView);
 
         // Ingresar mesa
         Intent myIntent = new Intent(MainActivity.this, Mesa.class);
         startActivity(myIntent);
 
+        // Inflar categorías y artículos
         for (Categoria c : menu.categorias) {
             View categoriaView;
             LayoutInflater li = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -172,10 +218,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
-
-
-        // Menu
-
 
     }
 
