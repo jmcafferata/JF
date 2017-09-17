@@ -30,7 +30,8 @@
             android:name=".Confirmar"
             android:theme="@style/AppTheme.CustomTheme" />
         <activity android:name=".Listo" />
-        <activity android:name=".Mesa"></activity>
+        <activity android:name=".Mesa" />
+        <activity android:name=".Ver"></activity>
     </application>
 
 </manifest>

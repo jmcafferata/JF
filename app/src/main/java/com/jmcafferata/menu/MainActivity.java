@@ -162,12 +162,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent myIntent = new Intent(MainActivity.this, Agregar.class);
                         Bundle bun = new Bundle();
-
                         bun.putParcelable("item", i);
-
-                        // bun.putParcelable("pedido", pedido);
                         myIntent.putExtras(bun);
-                        //startActivity(myIntent);
                         startActivityForResult(myIntent, 1);
 
                     }
@@ -253,9 +249,9 @@ public class MainActivity extends AppCompatActivity {
                         Intent newIntent = new Intent(MainActivity.this, Listo.class);
                         Bundle bun = new Bundle();
                         Calendar now = Calendar.getInstance();
-                        pedido.horaPedido = now.get(Calendar.HOUR_OF_DAY) + ":" + now.get(Calendar.MINUTE);
+                        pedido.setHoraPedido(now.get(Calendar.HOUR_OF_DAY) + ":" + now.get(Calendar.MINUTE));
                         System.out.println(pedido.toString());
-                        bun.putParcelable("pedido", pedido);
+                        bun.putParcelable("pedidoFinal", pedido);
                         newIntent.putExtras(bun);
                         startActivity(newIntent);
 
